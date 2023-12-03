@@ -1,0 +1,3 @@
+const SERVER_SUCCESS_CODE = 2000;
+
+export { SERVER_SUCCESS_CODE };
