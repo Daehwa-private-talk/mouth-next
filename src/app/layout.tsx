@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import Providers from '@/components/common/Providers';
+import Provider from '@/components/common/Provider';
 import ThemeProvider from '@/components/common/ThemeProvider';
 import Main from '@/components/common/Main';
 import ErrorBoundary from '@/components/common/ErrorBoundary';
@@ -19,11 +19,11 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <ErrorBoundary>
-          <Providers>
+          <Provider>
             <ThemeProvider>
               <Main>{children}</Main>
             </ThemeProvider>
-          </Providers>
+          </Provider>
         </ErrorBoundary>
       </body>
     </html>
