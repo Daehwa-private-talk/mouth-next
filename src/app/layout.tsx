@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Providers from '@/components/common/Providers';
 import ThemeProvider from '@/components/common/ThemeProvider';
 import Main from '@/components/common/Main';
+import ErrorBoundary from '@/components/common/ErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'Daehwa',
@@ -17,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <Providers>
-          <ThemeProvider>
-            <Main>{children}</Main>
-          </ThemeProvider>
-        </Providers>
+        <ErrorBoundary>
+          <Providers>
+            <ThemeProvider>
+              <Main>{children}</Main>
+            </ThemeProvider>
+          </Providers>
+        </ErrorBoundary>
       </body>
     </html>
   );
