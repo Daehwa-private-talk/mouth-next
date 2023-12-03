@@ -42,8 +42,8 @@ export const useSignIn = () => {
         const { token } = response.data.result || {};
         const { accessToken, refreshToken } = token || {};
 
-        const ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN;
-        const REFRESH_TOKEN = process.env.REACT_APP_REFRESH_TOKEN;
+        const ACCESS_TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+        const REFRESH_TOKEN = process.env.NEXT_PUBLIC_REFRESH_TOKEN;
 
         if (ACCESS_TOKEN && REFRESH_TOKEN && accessToken && refreshToken) {
           Cookie.setCookie(ACCESS_TOKEN, accessToken);
