@@ -45,7 +45,7 @@ requester.interceptors.response.use(
         })
         .catch((error) => {
           Cookie.removeCookie('refreshToken');
-          window.location.assign('/session_expired');
+          window.location.assign('/session-expired');
 
           return Promise.reject(error);
         })
