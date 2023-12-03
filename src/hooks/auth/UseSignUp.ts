@@ -66,7 +66,7 @@ export const useSignUp = () => {
 
     mutate(omit(signUpData, 'confirmPassword'), {
       onSuccess: () => {
-        router.push(SIGN_IN_PATH);
+        router.push('/sign-in');
       },
     });
   };

@@ -1,8 +1,8 @@
 import { createGlobalStyle, css } from 'styled-components';
 import theme from './theme';
 
-const styles = css`
-  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css');
+const GlobalStyles = createGlobalStyle`
+ @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css');
 
   * {
     box-sizing: border-box;
@@ -60,14 +60,10 @@ const styles = css`
   }
 
   a {
-    color: ${theme.colors.purple};
+    color: ${theme.colors?.purple};
     cursor: pointer;
     text-decoration: none;
   }
-`;
-
-const GlobalStyles = createGlobalStyle`
-  ${styles}
 `;
 
 export default GlobalStyles;
