@@ -1,10 +1,8 @@
 import 'styled-components';
-import { spacing } from './styles/spacing';
-import { Colors } from './styles/colors';
+import theme from '@/styles/theme';
+
+type CustomTheme = typeof theme;
 
 declare module 'styled-components' {
-  export interface DefaultTheme {
-    colors: Colors;
-    spacing: (number: number) => string;
-  }
+  export interface DefaultTheme extends CustomTheme {}
 }

@@ -60,7 +60,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${theme.colors.purple};
+    color: ${theme.colors?.purple};
     cursor: pointer;
     text-decoration: none;
   }
