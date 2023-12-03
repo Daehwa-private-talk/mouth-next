@@ -9,9 +9,9 @@ let isRefreshing = false;
 
 const requester = axios.create({
   baseURL:
-    process.env.NODE_ENV === 'development'
-      ? process.env.REACT_APP_DAEHWA_URL_DEV
-      : process.env.REACT_APP_DAEHWA_URL_PROD,
+    process.env.NEXT_PUBLIC_NODE_ENV === 'development'
+      ? process.env.NEXT_PUBLIC_DAEHWA_URL_DEV
+      : process.env.NEXT_PUBLIC_DAEHWA_URL_PROD,
 
   timeout: TIME_OUT,
   withCredentials: true,
@@ -25,7 +25,7 @@ requester.interceptors.response.use(
   (error) => {
     const originalRequest = error.config;
     const refreshToken = Cookie.getCookie(
-      process.env.REACT_APP_REFRESH_TOKEN || '',
+      process.env.NEXT_PUBLIC_REFRESH_TOKEN || '',
     );
 
     if (
