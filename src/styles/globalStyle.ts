@@ -1,7 +1,7 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import theme from './theme';
 
-const GlobalStyle = createGlobalStyle`
+const styles = css`
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/static/pretendard-dynamic-subset.css');
 
   * {
@@ -66,4 +66,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default GlobalStyle;
+const GlobalStyles = createGlobalStyle`
+  ${styles}
+`;
+
+export default GlobalStyles;
