@@ -39,8 +39,8 @@ const Image = styled('img')<Picture>`
   height: ${({ height }) => height}px;
   border: 8px solid
     ${({ theme, background }) =>
-      background ? theme.colors[background] : theme.colors.yellow};
+      background ? theme.colors?.[background] : theme.colors?.yellow};
   background-color: ${({ theme, background }) =>
-    background ? theme.colors[background] : theme.colors.yellow};
+    background ? theme.colors?.[background] : theme.colors?.yellow};
   border-radius: 50%;
 `;
