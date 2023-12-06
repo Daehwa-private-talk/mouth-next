@@ -48,6 +48,8 @@ export const useSignIn = () => {
         if (ACCESS_TOKEN && REFRESH_TOKEN && accessToken && refreshToken) {
           Cookie.setCookie(ACCESS_TOKEN, accessToken);
           Cookie.setCookie(REFRESH_TOKEN, refreshToken);
+
+          window.location.assign('/list');
         }
       },
       onError: () => {

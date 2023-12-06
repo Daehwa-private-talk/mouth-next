@@ -33,9 +33,14 @@ const AuthApi = {
   refresh: ({ refreshToken }: AuthRefreshToken) => {
     const path = getFullPath(REFRESH_PATH);
 
-    return requester.post(path, {
-      refreshToken,
+    return requester.post(path, null, {
+      params: refreshToken,
     });
+  },
+  test: () => {
+    const path = getFullPath('/auth/test');
+
+    return requester.get(path);
   },
 };
 
