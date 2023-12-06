@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 
-export const useHomeController = () => {
+export const useHome = () => {
   const router = useRouter();
 
   const handleClickRouteSignIn = () => {

@@ -1,11 +1,11 @@
 'use client';
 
 import { AuthButton, Balloon } from '@/components/common';
-import { useHomeController } from '@/hooks/home/useHome';
+import { useHome } from '@/hooks/home/useHome';
 import styled from 'styled-components';
 
 export default function Home() {
-  const { onClickRouteSignIn, onClickRouteSignUp } = useHomeController();
+  const { onClickRouteSignIn, onClickRouteSignUp } = useHome();
 
   return (
     <section>
