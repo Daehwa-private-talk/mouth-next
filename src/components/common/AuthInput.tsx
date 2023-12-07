@@ -80,7 +80,7 @@ const Input = styled('input')`
 `;
 
 const Error = styled('p')`
-  color: ${({ theme }) => theme.colors?.yellow};
+  color: ${({ theme }) => theme.colors?.red};
   font-size: 0.7rem;
   font-weight: 500;
 `;

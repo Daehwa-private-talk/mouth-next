@@ -27,7 +27,7 @@ const Content = styled('div')`
   border-radius: 8px;
   outline: 0px;
   opacity: 1;
-  background-color: ${({ theme }) => theme.colors?.white};
+  background-color: ${({ theme }) => theme.colors?.primary.main};
   color: ${({ theme }) => theme.colors?.dark};
   transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
 `;
@@ -37,7 +37,7 @@ const Arrow = styled('div')`
   width: 14px;
   height: 14px;
   border-radius: 0 3px 0 0;
-  background-color: ${({ theme }) => theme.colors?.white};
+  background-color: ${({ theme }) => theme.colors?.primary.main};
   clip-path: polygon(100% 100%, 0% 0%, 100% 0%);
   bottom: 0;
   left: 50%;

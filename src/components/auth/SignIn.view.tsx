@@ -7,15 +7,19 @@ interface Props {
   control: Control<SignIn>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   errors: FieldErrors<SignIn>;
+  handleClickSignUpButton: () => void;
 }
 
-export const SignInView = ({ control, onSubmit, errors }: Props) => {
+export const SignInView = ({
+  control,
+  onSubmit,
+  errors,
+  handleClickSignUpButton,
+}: Props) => {
   return (
     <Form onSubmit={onSubmit}>
       <Header>
-        <Balloon>
-          <Title>로그인 하기</Title>
-        </Balloon>
+        <Balloon>" 대화하기 "</Balloon>
       </Header>
       <InputContainer>
         <Label>이메일</Label>
@@ -26,8 +30,6 @@ export const SignInView = ({ control, onSubmit, errors }: Props) => {
           placeholder="이메일"
           error={errors.email}
         />
-      </InputContainer>
-      <InputContainer>
         <Label>비밀번호</Label>
         <AuthTextInput
           name="password"
@@ -39,6 +41,9 @@ export const SignInView = ({ control, onSubmit, errors }: Props) => {
       </InputContainer>
       <ButtonContainer>
         <AuthButton width={320}>로그인</AuthButton>
+        <AuthButton width={320} onClick={handleClickSignUpButton}>
+          회원가입
+        </AuthButton>
       </ButtonContainer>
     </Form>
   );
@@ -53,19 +58,16 @@ const Form = styled('form')`
 `;
 
 const Header = styled('header')`
-  margin-bottom: ${({ theme }) => theme.spacing?.(10)};
-`;
-
-const Title = styled('h4')`
-  font-size: 1rem;
+  font-size: 1.8rem;
   font-weight: 700;
+  color: ${({ theme }) => theme.colors?.dark};
 `;
 
 const InputContainer = styled('div')`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing?.(3)};
-  margin-bottom: ${({ theme }) => theme.spacing?.(3)};
+  margin-top: ${({ theme }) => theme.spacing?.(10)};
 `;
 
 const Label = styled('label')`
@@ -75,5 +77,8 @@ const Label = styled('label')`
 `;
 
 const ButtonContainer = styled('div')`
-  margin-top: ${({ theme }) => theme.spacing?.(3)};
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing?.(5)};
+  margin-top: ${({ theme }) => theme.spacing?.(10)};
 `;

@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compiler: { styledComponents: { ssr: true, cssProp: true } },
+  compiler: {
+    styledComponents: true,
+  },
   swcMinify: true,
   experimental: {
     appDir: true,
