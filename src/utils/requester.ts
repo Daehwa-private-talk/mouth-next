@@ -1,18 +1,20 @@
-import axios from 'axios';
+import axios, { CreateAxiosDefaults, ParamsSerializerOptions } from 'axios';
 import { Cookie } from '@/lib/cookie';
 import AuthApi from '@/apis/AuthApi';
+import { stringify } from 'qs';
+
+let isRefreshing = false;
 
 const TIME_OUT = 1000 * 120;
 const UNAUTHORIZED = 401;
 const STALE_REFRESH_TOKEN = 4108;
 
-const accessToken = Cookie.getCookie(
-  process.env.NEXT_PUBLIC_ACCESS_TOKEN || 'daehwa.access_token',
-);
+const ACCESS_TOKEN_TITLE = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+const REFRESH_TOKEN_TITLE = process.env.NEXT_PUBLIC_REFRESH_TOKEN;
 
-let isRefreshing = false;
+const accessToken = Cookie.getCookie(ACCESS_TOKEN_TITLE);
 
-const requester = axios.create({
+const axiosDefault: CreateAxiosDefaults<any> = {
   baseURL:
     process.env.NEXT_PUBLIC_NODE_ENV === 'development'
       ? process.env.NEXT_PUBLIC_DAEHWA_URL_DEV
@@ -22,59 +24,83 @@ const requester = axios.create({
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `${accessToken}`,
+  },
+  paramsSerializer: {
+    serialize: stringify,
+  } as ParamsSerializerOptions,
+};
+
+const defaultRequester = axios.create(axiosDefault);
+const requester = axios.create({
+  ...axiosDefault,
+  headers: {
+    ...axiosDefault.headers,
+    Authorization: accessToken,
   },
 });
 
 requester.interceptors.response.use(
   (response) => response,
   (error) => {
-    const refreshToken = Cookie.getCookie(
-      process.env.NEXT_PUBLIC_REFRESH_TOKEN || '',
-    );
-
-    console.log(error, '에러났당');
-
-    return;
+    const originalRequest = error.config;
 
     if (
       error.response &&
-      error.response.status === UNAUTHORIZED &&
+      error.response?.status === UNAUTHORIZED &&
+      !originalRequest._retry &&
       !isRefreshing
     ) {
+      const refreshToken = Cookie.getCookie(REFRESH_TOKEN_TITLE) as string;
+
       isRefreshing = true;
 
       return AuthApi.refresh({ refreshToken })
         .then((response) => {
-          Cookie.setCookie('accessToken', response.data.result?.accessToken);
-          Cookie.setCookie('refreshToken', response.data.result?.refreshToken);
+          originalRequest._retry = true;
 
-          window.alert('401 이당');
+          const { result } = response.data;
+          const newAccessToken = result?.accessToken;
+          const newRefreshToken = result?.refreshToken;
 
-          // return window.location.assign('/list');
+          Cookie.setCookie(ACCESS_TOKEN_TITLE, newAccessToken);
+          Cookie.setCookie(REFRESH_TOKEN_TITLE, newRefreshToken);
+
+          return axios({
+            ...originalRequest,
+            headers: {
+              ...axiosDefault.headers,
+              Authorization: newAccessToken,
+            },
+          });
         })
         .catch((error) => {
-          // Cookie.removeCookie('refreshToken');
-          // window.location.assign('/session-expired');
+          const { data } = error.response;
 
-          window.alert('섹션 없당');
+          if (data?.status?.code === STALE_REFRESH_TOKEN) {
+            Cookie.removeCookie(REFRESH_TOKEN_TITLE);
+            Cookie.removeCookie(ACCESS_TOKEN_TITLE);
+
+            window.alert(data?.status?.message || '만료된 세션입니다.');
+            window.location.assign('/session-expired');
+          } else {
+            const { status, data } = error.response;
+
+            window.alert(
+              `${status || data?.status?.code} ${
+                data?.status?.message || '에러'
+              }`,
+            );
+          }
 
           return Promise.reject(error);
         })
         .finally(() => {
           isRefreshing = false;
         });
-    } else if (
-      error.response &&
-      error.response.status.code === STALE_REFRESH_TOKEN &&
-      !isRefreshing
-    ) {
-      window.alert(error.response.status.message);
-      window.location.assign('/sign-in');
     }
 
     return Promise.reject(error);
   },
 );
 
-export default requester;
+export { defaultRequester, requester };
