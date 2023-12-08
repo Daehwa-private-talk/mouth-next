@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 import Provider from '@/components/common/Provider';
 import ThemeProvider from '@/components/common/ThemeProvider';
-import Main from '@/components/common/Main';
+
 import ErrorBoundary from '@/components/common/ErrorBoundary';
 
 export const metadata: Metadata = {
@@ -20,9 +20,7 @@ export default function RootLayout({
       <body>
         <ErrorBoundary>
           <Provider>
-            <ThemeProvider>
-              <Main>{children}</Main>
-            </ThemeProvider>
+            <ThemeProvider>{children}</ThemeProvider>
           </Provider>
         </ErrorBoundary>
       </body>

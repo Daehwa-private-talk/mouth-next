@@ -4,7 +4,7 @@ import {
   SIGN_IN_PATH,
   SIGN_UP_PATH,
 } from '@/constants/path/auth';
-import requester from '@/utils/requester';
+import { defaultRequester, requester } from '@/utils/requester';
 import { getFullPath } from '@/utils/common';
 
 interface AuthRefreshToken {
@@ -15,7 +15,7 @@ const AuthApi = {
   signIn: ({ email, password }: SignIn) => {
     const path = getFullPath(SIGN_IN_PATH);
 
-    return requester.post(path, {
+    return defaultRequester.post(path, {
       email,
       password,
     });
@@ -23,7 +23,7 @@ const AuthApi = {
   signUp: ({ name, email, nickname, password }: SignUp) => {
     const path = getFullPath(SIGN_UP_PATH);
 
-    return requester.post(path, {
+    return defaultRequester.post(path, {
       name,
       email,
       nickname,
@@ -33,10 +33,10 @@ const AuthApi = {
   refresh: ({ refreshToken }: AuthRefreshToken) => {
     const path = getFullPath(REFRESH_PATH);
 
-    return requester.post(path, null, {
-      params: refreshToken,
-    });
+    return requester.post(path, null, { params: { refreshToken } });
   },
+
+  // api test : will deprecate
   test: () => {
     const path = getFullPath('/auth/test');
 

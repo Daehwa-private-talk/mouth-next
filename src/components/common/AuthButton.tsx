@@ -1,13 +1,18 @@
-import React from 'react';
+'use client';
+
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 interface Props {
   width?: number;
   onClick?: () => void;
-  children?: React.ReactNode;
 }
 
-export const AuthButton = function ({ width = 230, onClick, children }: Props) {
+export const AuthButton = function ({
+  width = 230,
+  onClick,
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <Button width={width} onClick={onClick}>
       {children}

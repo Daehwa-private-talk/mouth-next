@@ -3,7 +3,7 @@
 import GlobalStyle from '@/styles/globalStyle';
 import theme from '@/styles/theme';
 import { useServerInsertedHTML } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import {
   ServerStyleSheet,
   StyleSheetManager,
@@ -12,9 +12,7 @@ import {
 
 export default function StyledComponentsRegistry({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: PropsWithChildren) {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
   useServerInsertedHTML(() => {

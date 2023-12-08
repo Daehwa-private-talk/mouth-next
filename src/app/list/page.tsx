@@ -4,9 +4,7 @@ import AuthApi from '@/apis/AuthApi';
 
 export default function List() {
   const onclickTest = async () => {
-    await AuthApi.test()
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    await AuthApi.test();
   };
   return (
     <main>

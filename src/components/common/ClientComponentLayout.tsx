@@ -1,13 +1,15 @@
 'use client';
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-export default function Main({ children }: { children: React.ReactNode }) {
-  return <MainContainer>{children}</MainContainer>;
-}
+export const ClientComponentLayout = function ({
+  children,
+}: PropsWithChildren) {
+  return <Main>{children}</Main>;
+};
 
-const MainContainer = styled('main')`
+const Main = styled('main')`
   width: 100vw;
   height: 100vh;
   display: flex;
