@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🗣 &nbsp;Daehwa
 
-## Getting Started
+### [사이드프로젝트]
 
-First, run the development server:
+채팅 서비스 개발
+<br/>
+<br/>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🤔 Difference
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+일반 채팅은 사용자가 입력을 n개 보내면, 말풍선이 n개 보여짐.<br/>
+채팅을 이용하여 대화를 할때 한 흐름 내 말풍선의 수가 많을수록 진정성이 떨어지는 단점이 있기 때문에,<br/>
+"대화" 에서는 상대방이 답장을 보내기전 연속된 시간에 입력받은 내용을 하나의 말풍선으로 묶어줄 예정.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<br/>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📄 Service
 
-## Learn More
+- [x] 로그인
+- [x] 회원가입
+- [ ] 채팅목록
+- [ ] 채팅
 
-To learn more about Next.js, take a look at the following resources:
+<br/>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Study point
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Turbopack
+- View / Logic 관심사 분리
+- SSR / Server Component
+- React-query
+- React-hook-form
+- 인증 및 권한 로직
+- 실시간 통신
 
-## Deploy on Vercel
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Development Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Next.js v13, Typescript
+- React-hook-form, React-query
+- Styled-Components
+- Socket.io
+- Turbopack
+
+<br/>
+
+## ⛓ File Directory & Architecture
+
+![arch](https://github.com/Daehwa-private-talk/mouth-next/assets/60544994/0781ff1d-4a1e-4dd7-8e7b-97782e592386)
+
+<br/>
