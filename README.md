@@ -6,6 +6,14 @@
 <br/>
 <br/>
 
+## 🤔 Difference
+
+일반 채팅은 사용자가 입력을 n개 보내면, 말풍선이 n개 보여짐.<br/>
+채팅을 이용하여 대화를 할때 한 흐름 내 말풍선의 수가 많을수록 진정성이 떨어지는 단점이 있기 때문에,<br/>
+"대화" 에서는 상대방이 답장을 보내기전 연속된 시간에 입력받은 내용을 하나의 말풍선으로 묶어줄 예정.
+
+<br/>
+
 ## 📄 Service
 
 - [x] 로그인
@@ -27,14 +35,6 @@
 
 <br/>
 
-## 🤔 Difference
-
-일반 채팅은 사용자가 입력을 n개 보내면, 말풍선이 n개 보여짐.<br/>
-채팅을 이용하여 대화를 할때 한 흐름 내 말풍선의 수가 많을수록 진정성이 떨어지는 단점이 있기 때문에,<br/>
-"대화" 에서는 상대방이 답장을 보내기전 연속된 시간에 입력받은 내용을 하나의 말풍선으로 묶어줄 예정.
-
-<br/>
-
 ## 🔧 Development Stack
 
 - Next.js v13, Typescript
@@ -42,3 +42,11 @@
 - Styled-Components
 - Socket.io
 - Turbopack
+
+<br/>
+
+## ⛓ File Directory & Architecture
+
+![arch](https://github.com/Daehwa-private-talk/mouth-next/assets/60544994/0781ff1d-4a1e-4dd7-8e7b-97782e592386)
+
+<br/>
