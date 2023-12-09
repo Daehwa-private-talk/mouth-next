@@ -3,7 +3,7 @@
 import React, { PropsWithChildren } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-export default function Provider({ children }: PropsWithChildren) {
+export default function QueryProvider({ children }: PropsWithChildren) {
   const [client] = React.useState(
     new QueryClient({
       defaultOptions: {

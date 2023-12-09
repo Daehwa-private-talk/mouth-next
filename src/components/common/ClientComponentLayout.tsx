@@ -1,12 +1,18 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export const ClientComponentLayout = function ({
   children,
 }: PropsWithChildren) {
-  return <Main>{children}</Main>;
+  const [mount, setMount] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMount(true);
+  }, []);
+
+  return mount && <Main>{children}</Main>;
 };
 
 const Main = styled('main')`

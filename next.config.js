@@ -1,12 +1,6 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: {
-    styledComponents: {
-      ssr: true,
-      cssProp: true,
-      displayName: true,
-      pure: true,
-    },
+    styledComponents: true,
   },
   swcMinify: true,
   experimental: {
