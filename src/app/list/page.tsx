@@ -1,5 +1,3 @@
-'use client';
-
 import AuthApi from '@/apis/AuthApi';
 
 export default function List() {
