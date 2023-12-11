@@ -1,11 +1,9 @@
-import React from 'react';
+'use client';
+
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-export const Balloon = function ({ children }: Props) {
+export const Balloon = function ({ children }: PropsWithChildren) {
   return (
     <Content>
       {children}

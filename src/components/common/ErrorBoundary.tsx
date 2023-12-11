@@ -1,8 +1,8 @@
 'use client';
 
+import { Fallback } from '@/components/common';
 import { ERROR } from '@/constants/messages';
 import React from 'react';
-import Fallback from './Fallback';
 
 interface Props {
   fallback?: React.ReactNode;

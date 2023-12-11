@@ -1,13 +1,20 @@
-import axios from 'axios';
+import axios, { CreateAxiosDefaults, ParamsSerializerOptions } from 'axios';
 import { Cookie } from '@/lib/cookie';
 import AuthApi from '@/apis/AuthApi';
-
-const TIME_OUT = 1000 * 120;
-const UNAUTHORIZED = 401;
+import { stringify } from 'qs';
 
 let isRefreshing = false;
 
-const requester = axios.create({
+const TIME_OUT = 1000 * 120;
+const UNAUTHORIZED = 401;
+const STALE_REFRESH_TOKEN = 4108;
+
+const ACCESS_TOKEN_TITLE = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
+const REFRESH_TOKEN_TITLE = process.env.NEXT_PUBLIC_REFRESH_TOKEN;
+
+const accessToken = Cookie.getCookie(ACCESS_TOKEN_TITLE);
+
+const axiosDefault: CreateAxiosDefaults<any> = {
   baseURL:
     process.env.NEXT_PUBLIC_NODE_ENV === 'development'
       ? process.env.NEXT_PUBLIC_DAEHWA_URL_DEV
@@ -18,34 +25,72 @@ const requester = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  paramsSerializer: {
+    serialize: stringify,
+  } as ParamsSerializerOptions,
+};
+
+const defaultRequester = axios.create(axiosDefault);
+const requester = axios.create({
+  ...axiosDefault,
+  headers: {
+    ...axiosDefault.headers,
+    Authorization: accessToken,
+  },
 });
 
 requester.interceptors.response.use(
   (response) => response,
   (error) => {
     const originalRequest = error.config;
-    const refreshToken = Cookie.getCookie(
-      process.env.NEXT_PUBLIC_REFRESH_TOKEN || '',
-    );
 
     if (
       error.response &&
-      error.response.status === UNAUTHORIZED &&
+      error.response?.status === UNAUTHORIZED &&
       !originalRequest._retry &&
       !isRefreshing
     ) {
+      const refreshToken = Cookie.getCookie(REFRESH_TOKEN_TITLE) as string;
+
       isRefreshing = true;
 
       return AuthApi.refresh({ refreshToken })
         .then((response) => {
           originalRequest._retry = true;
-          Cookie.setCookie('refreshToken', response.data.result?.refreshToken);
 
-          return axios(originalRequest);
+          const { result } = response.data;
+          const newAccessToken = result?.accessToken;
+          const newRefreshToken = result?.refreshToken;
+
+          Cookie.setCookie(ACCESS_TOKEN_TITLE, newAccessToken);
+          Cookie.setCookie(REFRESH_TOKEN_TITLE, newRefreshToken);
+
+          return axios({
+            ...originalRequest,
+            headers: {
+              ...axiosDefault.headers,
+              Authorization: newAccessToken,
+            },
+          });
         })
         .catch((error) => {
-          Cookie.removeCookie('refreshToken');
-          window.location.assign('/session-expired');
+          const { data } = error.response;
+
+          if (data?.status?.code === STALE_REFRESH_TOKEN) {
+            Cookie.removeCookie(REFRESH_TOKEN_TITLE);
+            Cookie.removeCookie(ACCESS_TOKEN_TITLE);
+
+            window.alert(data?.status?.message || '만료된 세션입니다.');
+            window.location.assign('/session-expired');
+          } else {
+            const { status, data } = error.response;
+
+            window.alert(
+              `${status || data?.status?.code} ${
+                data?.status?.message || '에러'
+              }`,
+            );
+          }
 
           return Promise.reject(error);
         })
@@ -58,4 +103,4 @@ requester.interceptors.response.use(
   },
 );
 
-export default requester;
+export { defaultRequester, requester };

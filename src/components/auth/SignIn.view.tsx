@@ -1,5 +1,12 @@
+'use client';
+
 import { SignIn } from '@/@types/auth';
-import { AuthButton, AuthTextInput, Balloon } from '@/components/common';
+import {
+  AuthButton,
+  AuthTextInput,
+  Balloon,
+  ClientComponentLayout,
+} from '@/components/common';
 import { Control, FieldErrors } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -11,36 +18,38 @@ interface Props {
 
 export const SignInView = ({ control, onSubmit, errors }: Props) => {
   return (
-    <Form onSubmit={onSubmit}>
-      <Header>
-        <Balloon>
-          <Title>로그인 하기</Title>
-        </Balloon>
-      </Header>
-      <InputContainer>
-        <Label>이메일</Label>
-        <AuthTextInput
-          name="email"
-          type="email"
-          control={control}
-          placeholder="이메일"
-          error={errors.email}
-        />
-      </InputContainer>
-      <InputContainer>
-        <Label>비밀번호</Label>
-        <AuthTextInput
-          name="password"
-          type="password"
-          control={control}
-          placeholder="비밀번호"
-          error={errors.password}
-        />
-      </InputContainer>
-      <ButtonContainer>
-        <AuthButton width={320}>로그인</AuthButton>
-      </ButtonContainer>
-    </Form>
+    <ClientComponentLayout>
+      <Form onSubmit={onSubmit}>
+        <Header>
+          <Balloon>
+            <Title>로그인 하기</Title>
+          </Balloon>
+        </Header>
+        <InputContainer>
+          <Label>이메일</Label>
+          <AuthTextInput
+            name="email"
+            type="email"
+            control={control}
+            placeholder="이메일"
+            error={errors.email}
+          />
+        </InputContainer>
+        <InputContainer>
+          <Label>비밀번호</Label>
+          <AuthTextInput
+            name="password"
+            type="password"
+            control={control}
+            placeholder="비밀번호"
+            error={errors.password}
+          />
+        </InputContainer>
+        <ButtonContainer>
+          <AuthButton width={320}>로그인</AuthButton>
+        </ButtonContainer>
+      </Form>
+    </ClientComponentLayout>
   );
 };
 

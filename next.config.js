@@ -1,10 +1,11 @@
-/** @type {import('next').NextConfig} */
+/**
+ * @type {import('next').NextConfig}
+ */
 const nextConfig = {
-  compiler: { styledComponents: { ssr: true, cssProp: true } },
-  swcMinify: true,
-  experimental: {
-    appDir: true,
+  compiler: {
+    styledComponents: true,
   },
+  swcMinify: true,
 };
 
 module.exports = nextConfig;

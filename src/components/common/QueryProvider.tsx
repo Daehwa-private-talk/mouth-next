@@ -1,13 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-export default function Provider({ children }: Props) {
+export default function QueryProvider({ children }: PropsWithChildren) {
   const [client] = React.useState(
     new QueryClient({
       defaultOptions: {
