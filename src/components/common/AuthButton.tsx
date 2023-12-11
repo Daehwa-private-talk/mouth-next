@@ -2,41 +2,22 @@
 
 import { StrictPropsWithChildren } from '@/@types/common';
 import React from 'react';
-import styled from 'styled-components';
 
 interface Props {
-  width?: number;
+  width?: string | number;
   onClick?: () => void;
 }
 
 export const AuthButton = function ({
-  width = 230,
   onClick,
   children,
 }: StrictPropsWithChildren<Props>) {
   return (
-    <Button width={width} onClick={onClick}>
+    <button
+      onClick={onClick}
+      className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >
       {children}
-    </Button>
+    </button>
   );
 };
-
-const Button = styled('button')<{ width?: number }>`
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors?.black};
-  background-color: ${({ theme }) => theme.colors?.yellow};
-  width: ${({ width }) => width}px;
-  height: 56px;
-  border-radius: 28px;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 1px 3px 0px rgba(30, 30, 30, 0.7);
-  }
-
-  &:active {
-    transform: translateY(0px);
-    box-shadow: none;
-  }
-`;

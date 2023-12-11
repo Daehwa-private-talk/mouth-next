@@ -1,15 +1,23 @@
 'use client';
 
-import { HomeView } from '@/components/home/Home.view';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useHome } from '@/hooks/home/useHome';
 
 export default function Home() {
-  const { onClickRouteSignIn, onClickRouteSignUp } = useHome();
+  // TODO: 로그인 여부 판별
+  const isLoggedIn = false;
+  const router = useRouter();
+  const { onClickRouteSignIn } = useHome();
 
-  return (
-    <HomeView
-      onClickRouteSignIn={onClickRouteSignIn}
-      onClickRouteSignUp={onClickRouteSignUp}
-    />
-  );
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/list');
+      return;
+    }
+
+    onClickRouteSignIn();
+  }, [isLoggedIn, router]);
+
+  return <div>loading... </div>;
 }
