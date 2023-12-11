@@ -3,12 +3,7 @@
 import { SignUpSchema } from '@/@types/auth';
 import { Control, FieldErrors } from 'react-hook-form';
 import styled from 'styled-components';
-import {
-  AuthButton,
-  AuthTextInput,
-  Balloon,
-  ClientComponentLayout,
-} from '@/components/common';
+import { AuthButton, AuthTextInput, Balloon } from '@/components/common';
 
 interface Props {
   control: Control<SignUpSchema>;
@@ -18,32 +13,31 @@ interface Props {
 
 export const SignUpView = ({ control, onSubmit, errors }: Props) => {
   return (
-    <ClientComponentLayout>
-      <Form onSubmit={onSubmit}>
-        <Header>
-          <Balloon>
-            <Title>회원가입 하기</Title>
-          </Balloon>
-        </Header>
-        <InputContainer>
-          <Label>이름</Label>
-          <AuthTextInput
-            name="name"
-            control={control}
-            placeholder="이름"
-            error={errors.name}
-          />
-        </InputContainer>
-        <InputContainer>
-          <Label>ID</Label>
-          <AuthTextInput
-            name="nickname"
-            control={control}
-            placeholder="ID"
-            error={errors.nickname}
-          />
-        </InputContainer>
-        {/* <InputContainer>
+    <Form onSubmit={onSubmit}>
+      <Header>
+        <Balloon>
+          <Title>회원가입 하기</Title>
+        </Balloon>
+      </Header>
+      <InputContainer>
+        <Label>이름</Label>
+        <AuthTextInput
+          name="name"
+          control={control}
+          placeholder="이름"
+          error={errors.name}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label>ID</Label>
+        <AuthTextInput
+          name="nickname"
+          control={control}
+          placeholder="ID"
+          error={errors.nickname}
+        />
+      </InputContainer>
+      {/* <InputContainer>
         <Label>생일</Label>
         <AuthTextInput
           name="birthday"
@@ -52,41 +46,40 @@ export const SignUpView = ({ control, onSubmit, errors }: Props) => {
           error={errors.birthday}
         />
       </InputContainer> */}
-        <InputContainer>
-          <Label>이메일</Label>
-          <AuthTextInput
-            name="email"
-            type="email"
-            control={control}
-            placeholder="이메일"
-            error={errors.email}
-          />
-        </InputContainer>
-        <InputContainer>
-          <Label>비밀번호</Label>
-          <AuthTextInput
-            name="password"
-            type="password"
-            control={control}
-            placeholder="영문/숫자/특수문자 포함 8자 이상의 비밀번호"
-            error={errors.password}
-          />
-        </InputContainer>
-        <InputContainer>
-          <Label>비밀번호 확인</Label>
-          <AuthTextInput
-            name="confirmPassword"
-            type="password"
-            control={control}
-            placeholder="영문/숫자/특수문자 포함 8자 이상의 비밀번호"
-            error={errors.confirmPassword}
-          />
-        </InputContainer>
-        <ButtonContainer>
-          <AuthButton width={320}>회원가입</AuthButton>
-        </ButtonContainer>
-      </Form>
-    </ClientComponentLayout>
+      <InputContainer>
+        <Label>이메일</Label>
+        <AuthTextInput
+          name="email"
+          type="email"
+          control={control}
+          placeholder="이메일"
+          error={errors.email}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label>비밀번호</Label>
+        <AuthTextInput
+          name="password"
+          type="password"
+          control={control}
+          placeholder="영문/숫자/특수문자 포함 8자 이상의 비밀번호"
+          error={errors.password}
+        />
+      </InputContainer>
+      <InputContainer>
+        <Label>비밀번호 확인</Label>
+        <AuthTextInput
+          name="confirmPassword"
+          type="password"
+          control={control}
+          placeholder="영문/숫자/특수문자 포함 8자 이상의 비밀번호"
+          error={errors.confirmPassword}
+        />
+      </InputContainer>
+      <ButtonContainer>
+        <AuthButton width={320}>회원가입</AuthButton>
+      </ButtonContainer>
+    </Form>
   );
 };
 

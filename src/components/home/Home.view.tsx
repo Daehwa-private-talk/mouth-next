@@ -1,10 +1,7 @@
 'use client';
 
-import {
-  AuthButton,
-  Balloon,
-  ClientComponentLayout,
-} from '@/components/common';
+import { AuthButton, Balloon } from '@/components/common';
+import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -14,7 +11,7 @@ interface Props {
 
 export const HomeView = ({ onClickRouteSignIn, onClickRouteSignUp }: Props) => {
   return (
-    <ClientComponentLayout>
+    <React.Fragment>
       <Balloon>
         <Headline>&quot; 대화하기 &quot;</Headline>
       </Balloon>
@@ -22,7 +19,7 @@ export const HomeView = ({ onClickRouteSignIn, onClickRouteSignUp }: Props) => {
         <AuthButton onClick={onClickRouteSignIn}>로그인</AuthButton>
         <AuthButton onClick={onClickRouteSignUp}>회원가입</AuthButton>
       </ButtonContainer>
-    </ClientComponentLayout>
+    </React.Fragment>
   );
 };
 

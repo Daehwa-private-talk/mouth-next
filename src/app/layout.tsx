@@ -1,6 +1,6 @@
-import ErrorBoundary from '@/components/common/ErrorBoundary';
-import QueryProvider from '@/components/common/QueryProvider';
-import ThemeProvider from '@/components/common/ThemeProvider';
+import ErrorBoundary from '@/components/wrappers/ErrorBoundary';
+import QueryProvider from '@/components/wrappers/QueryProvider';
+import ThemeProvider from '@/components/wrappers/ThemeProvider';
 import type { Metadata } from 'next';
 import { PropsWithChildren } from 'react';
 
