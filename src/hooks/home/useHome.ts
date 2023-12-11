@@ -4,11 +4,11 @@ export const useHome = () => {
   const router = useRouter();
 
   const handleClickRouteSignIn = () => {
-    router.push('/sign-in');
+    router.push('/auth/sign-in');
   };
 
   const handleClickRouteSignUp = () => {
-    router.push('/sign-up');
+    router.push('/auth/sign-up');
   };
 
   return {

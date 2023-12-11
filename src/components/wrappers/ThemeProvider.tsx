@@ -1,9 +1,10 @@
 'use client';
 
+import { StrictPropsWithChildren } from '@/@types/common';
 import GlobalStyle from '@/styles/globalStyle';
 import theme from '@/styles/theme';
 import { useServerInsertedHTML } from 'next/navigation';
-import React, { PropsWithChildren, useState } from 'react';
+import { useState } from 'react';
 import {
   ServerStyleSheet,
   StyleSheetManager,
@@ -12,7 +13,7 @@ import {
 
 export default function StyledComponentsRegistry({
   children,
-}: PropsWithChildren) {
+}: StrictPropsWithChildren) {
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet());
 
   useServerInsertedHTML(() => {

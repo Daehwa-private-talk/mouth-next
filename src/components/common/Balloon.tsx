@@ -1,9 +1,10 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
+import { StrictPropsWithChildren } from '@/@types/common';
+import React from 'react';
 import styled from 'styled-components';
 
-export const Balloon = function ({ children }: PropsWithChildren) {
+export const Balloon = function ({ children }: StrictPropsWithChildren) {
   return (
     <Content>
       {children}

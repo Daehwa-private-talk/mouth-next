@@ -1,9 +1,10 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
+import { StrictPropsWithChildren } from '@/@types/common';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-export default function QueryProvider({ children }: PropsWithChildren) {
+export default function QueryProvider({ children }: StrictPropsWithChildren) {
   const [client] = React.useState(
     new QueryClient({
       defaultOptions: {
