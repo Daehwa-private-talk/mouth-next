@@ -1,9 +1,10 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
+import { StrictPropsWithChildren } from '@/@types/common';
+import React from 'react';
 import styled from 'styled-components';
 
-export default function AuthLayout({ children }: PropsWithChildren) {
+export default function AuthLayout({ children }: StrictPropsWithChildren) {
   return <Main>{children}</Main>;
 }
 

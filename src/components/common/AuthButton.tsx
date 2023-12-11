@@ -1,6 +1,7 @@
 'use client';
 
-import React, { PropsWithChildren } from 'react';
+import { StrictPropsWithChildren } from '@/@types/common';
+import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
@@ -12,7 +13,7 @@ export const AuthButton = function ({
   width = 230,
   onClick,
   children,
-}: PropsWithChildren<Props>) {
+}: StrictPropsWithChildren<Props>) {
   return (
     <Button width={width} onClick={onClick}>
       {children}
