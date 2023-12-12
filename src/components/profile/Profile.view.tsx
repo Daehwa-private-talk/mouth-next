@@ -9,75 +9,25 @@ interface Props {
 export const Profile = ({ userInfo }: Props) => {
   const { name, profileImage, statusMessage } = userInfo;
   return (
-    <React.Fragment>
-      <article>
-        <Avatar profileImage={profileImage} />
-      </article>
-      <div>
-        <h4>{name}</h4>
-        <div>
-          <p>{statusMessage}</p>
-          <button>편집</button>
+    <>
+      <div className="flex flex-col items-center pb-10">
+        <article>
+          <Avatar profileImage={profileImage} />
+        </article>
+        <h5 className="mt-3 mb-1 text-xl font-medium text-gray-900">{name}</h5>
+
+        <div className="flex items-center justify-center gap-2">
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            {statusMessage}
+          </span>
+          <button
+            type="button"
+            className="px-2 py-1 text-xs font-medium text-center text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300"
+          >
+            편집
+          </button>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
-
-// const ProfileContainer = styled('article')`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   margin: ${({ theme }) => theme.spacing?.(40)} 0
-//     ${({ theme }) => theme.spacing?.(20)};
-// `;
-
-// const ProfileContentContainer = styled('div')`
-//   display: flex;
-//   width: 100%;
-//   flex-direction: column;
-//   align-items: center;
-//   color: ${({ theme }) => theme.colors?.white};
-// `;
-
-// const Name = styled('h4')`
-//   font-size: 32px;
-// `;
-
-// const StatusMessageContainer = styled('div')`
-//   display: inline-flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin: ${({ theme }) => theme.spacing?.(7)} 0;
-//   padding-bottom: ${({ theme }) => theme.spacing?.(8)};
-//   border-bottom: 1px solid ${({ theme }) => theme.colors?.white};
-//   gap: ${({ theme }) => theme.spacing?.(5)};
-//   width: 400px;
-// `;
-
-// const StatusMessage = styled('p')`
-//   font-size: 18px;
-//   width: fit-content;
-//   max-width: 340px;
-//   word-wrap: break-word;
-// `;
-
-// const StatusEditButton = styled('button')`
-//   padding: ${({ theme }) => `${theme.spacing?.(2)} ${theme.spacing?.(4)}`};
-//   background: none;
-//   border: 1px solid ${({ theme }) => theme.colors?.white};
-//   width: 50px;
-//   height: 26px;
-//   border-radius: 13px;
-//   color: ${({ theme }) => theme.colors?.white};
-//   cursor: pointer;
-
-//   &:hover {
-//     transform: translateY(-1px);
-//   }
-
-//   &:active {
-//     transform: translateY(0.5px);
-//   }
-// `;

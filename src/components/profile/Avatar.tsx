@@ -1,4 +1,5 @@
-import initialProfileUrl from '@/assets/images/initialProfile.svg';
+import Image from 'next/image';
+import initialProfileUrl from '/public/images/initialProfile.svg';
 
 interface Props {
   profileImage?: string;
@@ -6,37 +7,25 @@ interface Props {
   height?: number;
 }
 
-type Picture = Omit<Props, 'profileImage'>;
-
 export const Avatar = ({
-  profileImage,
-  width = 300,
-  height = 300,
+  profileImage = initialProfileUrl,
+  width = 200,
+  height = 200,
 }: Props) => {
   return (
-    <picture>
+    <picture className="relative inline-flex items-center p-1 text-sm font-medium text-center text-white rounded-full dark:bg-indigo-300">
       <source type="image/webp" srcSet={initialProfileUrl} />
-      <img
+      <Image
         loading="lazy"
-        sizes="(max-width: 350px)"
         decoding="async"
         src={profileImage}
         alt="profile"
         width={width}
         height={height}
-        // background={background}
       />
+      <div className="absolute flex items-center justify-center w-12 h-12 text-lg rounded-full right-1 top-2 dark:bg-yellow-100 drop-shadow-lg">
+        <span className="text-2xl">👍</span>
+      </div>
     </picture>
   );
 };
-
-// const Image = styled('img')<Picture>`
-//   width: ${({ width }) => width}px;
-//   height: ${({ height }) => height}px;
-//   border: 8px solid
-//     ${({ theme, background }) =>
-//       background ? theme.colors?.[background] : theme.colors?.yellow};
-//   background-color: ${({ theme, background }) =>
-//     background ? theme.colors?.[background] : theme.colors?.yellow};
-//   border-radius: 50%;
-// `;
