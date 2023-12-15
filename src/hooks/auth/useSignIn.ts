@@ -1,6 +1,11 @@
 import { SignIn, SignIn as SignInSchema } from '@/@types/auth';
 import AuthApi from '@/apis/AuthApi';
-import { Cookie } from '@/lib/cookie';
+import {
+  ACCESS_TOKEN_TITLE,
+  IS_USER,
+  REFRESH_TOKEN_TITLE,
+} from '@/constants/common';
+import { LIST } from '@/constants/path/chat';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { isEmpty } from 'lodash';
 import {
@@ -11,6 +16,7 @@ import {
 } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
+import { setCookie } from 'cookies-next';
 
 const SIGN_IN_DEFAULT_VALUE = { email: '', password: '' };
 
@@ -39,17 +45,15 @@ export const useSignIn = () => {
 
     mutate(signInData, {
       onSuccess: (response) => {
-        const { token } = response.data.result || {};
+        const { email, token } = response.data.result || {};
         const { accessToken, refreshToken } = token || {};
 
-        const ACCESS_TOKEN = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-        const REFRESH_TOKEN = process.env.NEXT_PUBLIC_REFRESH_TOKEN;
+        if (accessToken && refreshToken) {
+          setCookie(ACCESS_TOKEN_TITLE, accessToken);
+          setCookie(REFRESH_TOKEN_TITLE, refreshToken);
+          setCookie(IS_USER, email);
 
-        if (ACCESS_TOKEN && REFRESH_TOKEN && accessToken && refreshToken) {
-          Cookie.setCookie(ACCESS_TOKEN, accessToken);
-          Cookie.setCookie(REFRESH_TOKEN, refreshToken);
-
-          window.location.assign('/list');
+          window.location.assign(LIST);
         }
       },
       onError: () => {

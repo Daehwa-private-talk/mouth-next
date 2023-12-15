@@ -6,10 +6,10 @@ export interface SignIn {
 export interface SignUpSchema {
   name: string;
   email: string;
-  birthday?: string;
+  birthDate: string;
   nickname: string;
   password: string;
   confirmPassword: string;
 }
 
-export type SignUp = Omit<SignUpSchema, 'confirmPassword' | 'birthday'>;
+export type SignUp = Omit<SignUpSchema, 'confirmPassword'>;

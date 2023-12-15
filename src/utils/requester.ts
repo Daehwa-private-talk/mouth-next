@@ -1,7 +1,8 @@
 import axios, { CreateAxiosDefaults, ParamsSerializerOptions } from 'axios';
-import { Cookie } from '@/lib/cookie';
 import AuthApi from '@/apis/AuthApi';
 import { stringify } from 'qs';
+import { ACCESS_TOKEN_TITLE, REFRESH_TOKEN_TITLE } from '@/constants/common';
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 
 let isRefreshing = false;
 
@@ -9,10 +10,7 @@ const TIME_OUT = 1000 * 120;
 const UNAUTHORIZED = 401;
 const STALE_REFRESH_TOKEN = 4108;
 
-const ACCESS_TOKEN_TITLE = process.env.NEXT_PUBLIC_ACCESS_TOKEN;
-const REFRESH_TOKEN_TITLE = process.env.NEXT_PUBLIC_REFRESH_TOKEN;
-
-const accessToken = Cookie.getCookie(ACCESS_TOKEN_TITLE);
+const accessToken = getCookie(ACCESS_TOKEN_TITLE);
 
 const axiosDefault: CreateAxiosDefaults<any> = {
   baseURL:
@@ -50,7 +48,7 @@ requester.interceptors.response.use(
       !originalRequest._retry &&
       !isRefreshing
     ) {
-      const refreshToken = Cookie.getCookie(REFRESH_TOKEN_TITLE) as string;
+      const refreshToken = getCookie(REFRESH_TOKEN_TITLE) as string;
 
       isRefreshing = true;
 
@@ -62,8 +60,8 @@ requester.interceptors.response.use(
           const newAccessToken = result?.accessToken;
           const newRefreshToken = result?.refreshToken;
 
-          Cookie.setCookie(ACCESS_TOKEN_TITLE, newAccessToken);
-          Cookie.setCookie(REFRESH_TOKEN_TITLE, newRefreshToken);
+          setCookie(ACCESS_TOKEN_TITLE, newAccessToken);
+          setCookie(REFRESH_TOKEN_TITLE, newRefreshToken);
 
           return axios({
             ...originalRequest,
@@ -77,8 +75,8 @@ requester.interceptors.response.use(
           const { data } = error.response;
 
           if (data?.status?.code === STALE_REFRESH_TOKEN) {
-            Cookie.removeCookie(REFRESH_TOKEN_TITLE);
-            Cookie.removeCookie(ACCESS_TOKEN_TITLE);
+            deleteCookie(REFRESH_TOKEN_TITLE);
+            deleteCookie(ACCESS_TOKEN_TITLE);
 
             window.alert(data?.status?.message || '만료된 세션입니다.');
             window.location.assign('/session-expired');
