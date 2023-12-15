@@ -66,7 +66,9 @@ export const useSignUp = () => {
         router.push(SIGN_IN_PATH);
       },
       onError: (error: any) => {
-        window.alert(error?.response?.data?.status?.message || 'Error');
+        window.alert(
+          error?.response?.data?.status?.message || '회원가입에 실패했습니다.',
+        );
       },
     });
   };
