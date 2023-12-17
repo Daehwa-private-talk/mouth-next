@@ -1,4 +1,5 @@
 import { StrictPropsWithChildren } from '@/@types/common';
+import AuthWrapper from '@/components/wrappers/AuthWrapper';
 import ErrorBoundary from '@/components/wrappers/ErrorBoundary';
 import QueryProvider from '@/components/wrappers/QueryProvider';
 import ThemeProvider from '@/components/wrappers/ThemeProvider';
@@ -15,7 +16,9 @@ export default function RootLayout({ children }: StrictPropsWithChildren) {
       <body>
         <ErrorBoundary>
           <QueryProvider>
-            <ThemeProvider>{children}</ThemeProvider>
+            <AuthWrapper>
+              <ThemeProvider>{children}</ThemeProvider>
+            </AuthWrapper>
           </QueryProvider>
         </ErrorBoundary>
       </body>

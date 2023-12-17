@@ -37,15 +37,15 @@ export const SignUpView = ({ control, onSubmit, errors }: Props) => {
           error={errors.nickname}
         />
       </InputContainer>
-      {/* <InputContainer>
+      <InputContainer>
         <Label>생일</Label>
         <AuthTextInput
-          name="birthday"
+          name="birthDate"
           control={control}
-          placeholder="생일"
-          error={errors.birthday}
+          placeholder="YYYY-MM-DD"
+          error={errors.birthDate}
         />
-      </InputContainer> */}
+      </InputContainer>
       <InputContainer>
         <Label>이메일</Label>
         <AuthTextInput
