@@ -8,14 +8,14 @@ interface Props {
   control: Control<SignIn>;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
   errors: FieldErrors<SignIn>;
-  handleClickSignUpButton: () => void;
+  onClickSignUpButton: () => void;
 }
 
 export const SignInView = ({
   control,
   onSubmit,
   errors,
-  handleClickSignUpButton,
+  onClickSignUpButton,
 }: Props) => {
   return (
     <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
@@ -63,7 +63,7 @@ export const SignInView = ({
           회원이 아니신가요?{' '}
           <a
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            onClick={handleClickSignUpButton}
+            onClick={onClickSignUpButton}
           >
             회원가입하기
           </a>

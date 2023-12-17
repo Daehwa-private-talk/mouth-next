@@ -7,5 +7,6 @@ namespace NodeJS {
     NEXT_PUBLIC_ACCESS_TOKEN: string;
     NEXT_PUBLIC_REFRESH_TOKEN: string;
     NEXT_PUBLIC_BASE_URL: string;
+    NEXT_PUBLIC_IS_USER: string;
   }
 }

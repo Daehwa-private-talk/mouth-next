@@ -14,6 +14,7 @@ const PASSWORD_RULE_REGEXP =
 const signUpSchema = yup.object().shape({
   name: yup.string().required('이름을 입력해주세요.'),
   nickname: yup.string().required('ID를 입력해주세요.'),
+  birthDate: yup.string().required('생일을 입력해주세요.'),
   email: yup
     .string()
     .email('이메일 형식에 맞게 입력해주세요.')
@@ -37,6 +38,7 @@ const SIGN_UP_DEFAULT_VALUE = {
   email: '',
   password: '',
   confirmPassword: '',
+  birthDate: '',
 };
 
 export const useSignUp = () => {
@@ -60,7 +62,13 @@ export const useSignUp = () => {
 
     mutate(omit(signUpData, 'confirmPassword'), {
       onSuccess: () => {
-        router.push('/auth/sign-in');
+        window.alert('회원가입을 완료했습니다!');
+        router.push(SIGN_IN_PATH);
+      },
+      onError: (error: any) => {
+        window.alert(
+          error?.response?.data?.status?.message || '회원가입에 실패했습니다.',
+        );
       },
     });
   };
