@@ -4,7 +4,7 @@ interface Props extends StrictPropsWithChildren {
   size: AvatarSize;
 }
 
-const StatusSize = {
+const statusSize = {
   sm: {
     containerSize: 'w-6 h-6',
     textSize: 'sm',
@@ -18,7 +18,7 @@ const StatusSize = {
 };
 
 export const Status = ({ size, children }: Props) => {
-  const { containerSize, textSize, position } = StatusSize[size];
+  const { containerSize, textSize, position } = statusSize[size];
 
   return (
     <div
