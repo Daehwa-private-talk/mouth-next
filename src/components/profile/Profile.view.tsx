@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar } from './Avatar';
+import { Avatar } from '../common/Avatar';
 import { UserDefaultType } from '@/@types/user';
 
 interface Props {
@@ -7,12 +7,12 @@ interface Props {
 }
 
 export const Profile = ({ userInfo }: Props) => {
-  const { name, profileImage, statusMessage } = userInfo;
+  const { name, profileImage, status, statusMessage } = userInfo;
   return (
     <>
       <div className="flex flex-col items-center pb-10">
         <article>
-          <Avatar profileImage={profileImage} />
+          <Avatar profileImage={profileImage} status={status} />
         </article>
         <h5 className="mt-3 mb-1 text-xl font-medium text-gray-900">{name}</h5>
 
