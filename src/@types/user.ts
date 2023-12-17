@@ -2,7 +2,9 @@ export interface UserDefaultType {
   id: number;
   name: string;
   profileImage?: string;
+  status?: string;
   statusMessage?: string;
+  birthDate?: string;
 }
 
 export interface FriendType extends UserDefaultType {

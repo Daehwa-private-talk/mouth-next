@@ -2,8 +2,8 @@ import { StrictPropsWithChildren } from '@/@types/common';
 import AuthWrapper from '@/components/wrappers/AuthWrapper';
 import ErrorBoundary from '@/components/wrappers/ErrorBoundary';
 import QueryProvider from '@/components/wrappers/QueryProvider';
-import ThemeProvider from '@/components/wrappers/ThemeProvider';
 import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Daehwa',
@@ -16,9 +16,7 @@ export default function RootLayout({ children }: StrictPropsWithChildren) {
       <body>
         <ErrorBoundary>
           <QueryProvider>
-            <AuthWrapper>
-              <ThemeProvider>{children}</ThemeProvider>
-            </AuthWrapper>
+            <AuthWrapper>{children}</AuthWrapper>
           </QueryProvider>
         </ErrorBoundary>
       </body>

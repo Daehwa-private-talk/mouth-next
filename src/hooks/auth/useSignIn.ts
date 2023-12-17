@@ -5,9 +5,12 @@ import {
   IS_USER,
   REFRESH_TOKEN_TITLE,
 } from '@/constants/common';
+import { SIGN_UP_PATH } from '@/constants/path/auth';
 import { LIST } from '@/constants/path/chat';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { setCookie } from 'cookies-next';
 import { isEmpty } from 'lodash';
+import { useRouter } from 'next/navigation';
 import {
   FieldErrors,
   SubmitErrorHandler,
@@ -16,7 +19,6 @@ import {
 } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import * as yup from 'yup';
-import { setCookie } from 'cookies-next';
 
 const SIGN_IN_DEFAULT_VALUE = { email: '', password: '' };
 
@@ -26,6 +28,7 @@ const signInSchema = yup.object().shape({
 });
 
 export const useSignIn = () => {
+  const router = useRouter();
   const queryFn = (params: SignIn) => AuthApi.signIn(params);
   const { mutate } = useMutation(queryFn);
 
@@ -70,9 +73,14 @@ export const useSignIn = () => {
 
   const onSubmit = handleSubmit(submitSignInInfo, catchError);
 
+  const handleClickSignUpButton = () => {
+    router.push(SIGN_UP_PATH);
+  };
+
   return {
     control,
     onSubmit,
     errors,
+    onClickSignUpButton: handleClickSignUpButton,
   };
 };

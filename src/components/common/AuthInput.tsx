@@ -1,7 +1,6 @@
 'use client';
 
 import React, { InputHTMLAttributes } from 'react';
-import styled from 'styled-components';
 import {
   Control,
   Controller,
@@ -36,8 +35,8 @@ export const AuthTextInput = function <T extends FieldValues>({
       control={control}
       name={name as Path<T>}
       render={({ field }) => (
-        <InputContainer>
-          <Input
+        <>
+          <input
             {...textInputProps}
             {...field}
             value={value}
@@ -46,43 +45,11 @@ export const AuthTextInput = function <T extends FieldValues>({
               field.onChange(e);
               onChange?.(e);
             }}
+            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
-          <Error>{error?.message}</Error>
-        </InputContainer>
+          <p className="text-red-600 text-xs">{error?.message}</p>
+        </>
       )}
     />
   );
 };
-
-const InputContainer = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing?.(2)};
-`;
-
-const Input = styled('input')`
-  width: 320px;
-  height: 48px;
-  padding: ${({ theme }) => theme.spacing?.(4)};
-  border: none;
-  outline: none;
-  color: ${({ theme }) => theme.colors?.dark};
-  background-color: ${({ theme }) => theme.colors?.white};
-  font-size: 1.05rem;
-  border-radius: 5px;
-
-  &::placeholder {
-    font-size: 0.9rem;
-    color: ${({ theme }) => theme.colors?.gray};
-  }
-
-  &:focus::placeholder {
-    opacity: 0;
-  }
-`;
-
-const Error = styled('p')`
-  color: ${({ theme }) => theme.colors?.yellow};
-  font-size: 0.7rem;
-  font-weight: 500;
-`;
